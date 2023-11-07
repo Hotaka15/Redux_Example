@@ -9,6 +9,7 @@ import {
   todoListSelector,
   todosRemainingselector,
 } from "../../redux/selectors";
+import TodosSlice from "./TodosSlice";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState("");
@@ -25,7 +26,7 @@ export default function TodoList() {
   };
   const handleAddButtonClick = () => {
     dispatch(
-      addTodos({
+      TodosSlice.actions.addTodos({
         id: uuidv4(),
         name: todoName,
         completed: false,

@@ -6,6 +6,7 @@ import {
   searchFilterChange,
   statusFilterChange,
 } from "../../redux/actions";
+import FiltersSlice from "./FiltersSlice";
 
 const { Search } = Input;
 
@@ -16,17 +17,17 @@ export default function Filters() {
   const dispath = useDispatch();
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
-    dispath(searchFilterChange(e.target.value));
+    dispath(FiltersSlice.actions.searchFilterChange(e.target.value));
   };
   const handleStatusChange = (e) => {
     setfilterStatus(e.target.value);
-    dispath(statusFilterChange(e.target.value));
+    dispath(FiltersSlice.actions.statusFilterChange(e.target.value));
   };
 
   const handelPriorityChange = (value) => {
     console.log(value);
     setfilterpriorities(value);
-    dispath(prioriryFilterChange(value));
+    dispath(FiltersSlice.actions.prioriryFilterChange(value));
   };
   return (
     <Row justify="center">

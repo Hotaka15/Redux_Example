@@ -1,25 +1,49 @@
-const initState = [
-  { id: 1, name: "Learn Yoga", completed: true, priority: "Medium" },
-  { id: 2, name: "Learn React", completed: false, priority: "High" },
-  { id: 3, name: "Learn Redux", completed: false, priority: "Low" },
-];
+// const initState = [
+//   { id: 1, name: "Learn Yoga", completed: true, priority: "Medium" },
+//   { id: 2, name: "Learn React", completed: false, priority: "High" },
+//   { id: 3, name: "Learn Redux", completed: false, priority: "Low" },
+// ];
 
-const todoListReducer = (state = initState, action) => {
-  //console.log(state, action);
-  switch (action.type) {
-    case "todoList/addTodos":
-      return [...state, action.payload];
+import { createSlice } from "@reduxjs/toolkit";
 
-    case "todoList/toggleTodoStatus":
-      return state.map((todo) =>
-        todo.id === action.payload
-          ? { ...todo, completed: !todo.completed }
-          : todo
-      );
+// const todoListReducer = (state = initState, action) => {
+//   //console.log(state, action);
+//   switch (action.type) {
+//     case "todoList/addTodos":
+//       return [...state, action.payload];
 
-    default:
-      return state;
-  }
-};
+//     case "todoList/toggleTodoStatus":
+//       return state.map((todo) =>
+//         todo.id === action.payload
+//           ? { ...todo, completed: !todo.completed }
+//           : todo
+//       );
 
-export default todoListReducer;
+//     default:
+//       return state;
+//   }
+// };
+
+// export default todoListReducer;
+
+export default createSlice({
+  name: "todoList",
+  initialState: [
+    { id: 1, name: "Learn Yoga", completed: true, priority: "Medium" },
+    { id: 2, name: "Learn React", completed: false, priority: "High" },
+    { id: 3, name: "Learn Redux", completed: false, priority: "Low" },
+  ],
+
+  reducers: {
+    addTodos: (state, action) => {
+      state.push(action.payload);
+    },
+    //action creators
+    toggleTodoStatus: (state, action) => {
+      const currentTodo = state.find((todo) => todo.id === action.payload); // [{abc: ''}]
+      if (currentTodo) {
+        currentTodo.completed = !currentTodo.completed;
+      }
+    },
+  },
+});

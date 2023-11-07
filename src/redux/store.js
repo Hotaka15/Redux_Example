@@ -12,7 +12,9 @@ import todoListReducer from "../components/TodoList/TodosSlice";
 
 const store = configureStore({
   reducer: {
-    filter: filtersReducer,
-    todoList: todoListReducer,
+    filter: filtersReducer.reducer,
+    todoList: todoListReducer.reducer,
   },
 });
+
+export default store;
